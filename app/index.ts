@@ -13,7 +13,7 @@ const twilio_client = twilio(
     twilio_config.auth_token
 );
 
-const send = async () => {
+export const send = async () => {
     console.log('sending');
 
     const body = 'Glastonbury says Hello!';
@@ -34,5 +34,3 @@ const send = async () => {
         console.log(error);
     }
 };
-
-send();
