@@ -92,17 +92,3 @@ const main = async () => {
 };
 
 main().then();
-
-// POST https://glastonbury.seetickets.com/event/addregistrations
-
-/*
-showCode: 1300001
-registrations[0].RegistrationId: 4145617314
-registrations[0].PostCode: BN112ES
-registrations[1].RegistrationId: 1040388612
-registrations[1].PostCode: BN112ES
-registrations[2].RegistrationId:
-registrations[2].PostCode:
-registrations[3].RegistrationId:
-registrations[3].PostCode:
- */
