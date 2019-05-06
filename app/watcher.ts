@@ -65,7 +65,8 @@ const watch = async () => {
     }
 
     if (!overwrite && changed) {
-        send();
+        console.log('sending message')
+        //send();
     }
 
     if (overwrite) {
