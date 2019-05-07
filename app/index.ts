@@ -16,7 +16,7 @@ const twilio_client = twilio(
 export const send = async () => {
     console.log('sending');
 
-    const body = 'Glastonbury says Hello!';
+    const body = 'Check Glastonbury! https://glastonbury.seetickets.com/';
     const from = '+447480803357';
     const to = '+447880880680';
 
