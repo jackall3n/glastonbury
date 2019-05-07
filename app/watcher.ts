@@ -79,14 +79,16 @@ const delay = ms => new Promise(r => {
     setTimeout(r, ms);
 });
 
+const timeout = process.env.BACKOFF_TIMEOUT ? parseInt(process.env.BACKOFF_TIMEOUT) : 5000;
+
 const main = async () => {
     await fs.ensureFile(CURRENT);
 
     while (true) {
         console.log(chalk`{blue ${Date.now().toString()}} {green Checking}`);
         await watch();
-        console.log(chalk.green('Waiting...'));
-        await delay(5000);
+        console.log(chalk.green(`Waiting for ${timeout} ms`));
+        await delay(timeout);
     }
 };
 
