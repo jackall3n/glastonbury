@@ -83,7 +83,7 @@ const main = async () => {
     await fs.ensureFile(CURRENT);
 
     while (true) {
-        console.log(chalk`{blue ${Date.now().toString()} {green Checking}`);
+        console.log(chalk`{blue ${Date.now().toString()}} {green Checking}`);
         await watch();
         console.log(chalk.green('Waiting...'));
         await delay(5000);
