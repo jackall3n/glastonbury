@@ -65,16 +65,14 @@ const watch = async () => {
     }
 
     if (!overwrite && changed) {
-        console.log('sending message')
-        //send();
+        console.log('sending message');
+        await send();
     }
 
     if (overwrite) {
         await fs.writeFile(CURRENT, minified);
         overwrite = false;
     }
-
-
 };
 
 const delay = ms => new Promise(r => {

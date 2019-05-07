@@ -29,7 +29,7 @@ export const send = async () => {
     try {
         const response = await twilio_client.messages.create(message);
 
-        console.log(response);
+        console.log('message', response.status);
     } catch (error) {
         console.log(error);
     }
