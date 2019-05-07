@@ -23,7 +23,7 @@ const watch = async () => {
 
     content.find('.entry-content').removeAttr('data-refresh-id');
 
-    const site_content = content.html().replace(/serverTime: [0-9]+,/gm, '');
+    const site_content = content.find('body').html().replace(/serverTime: [0-9]+,/gm, '');
 
     const minified = minifier.minify(site_content, {
         //collapseWhitespace: true,
@@ -44,9 +44,9 @@ const watch = async () => {
         diffs.forEach(function (part) {
 
             if (part.added) {
-                m += chalk.green(part.value);
+                m += chalk.bgGreen(JSON.stringify(part.value));
             } else if (part.removed) {
-                m += chalk.red(part.value);
+                m += chalk.bgRed(JSON.stringify(part.value));
             } else {
                 let value = part.value;
 
@@ -64,7 +64,7 @@ const watch = async () => {
 
     }
 
-    if (!overwrite && changed) {
+    if (!overwrite && changed && process.env.DISABLE_MESSAGING !== "true") {
         console.log('sending message');
         await send();
     }
@@ -87,7 +87,7 @@ const main = async () => {
     while (true) {
         console.log(chalk`{blue ${Date.now().toString()}} {green Checking}`);
         await watch();
-        console.log(chalk.green(`Waiting for ${timeout} ms`));
+        console.log(chalk.yellow(`Waiting for ${timeout} ms`));
         await delay(timeout);
     }
 };
