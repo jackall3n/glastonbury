@@ -12,6 +12,8 @@
     "twilio": "^3.30.2"
   },
   "scripts": {
+    "forever": "forever start dist/watcher.js",
+    "update": "git pull && tsc",
     "prod": "ts-node dist/watcher",
     "start": "ts-node app/index",
     "watcher": "ts-node app/watcher"
