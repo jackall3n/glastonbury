@@ -12,6 +12,7 @@
     "twilio": "^3.30.2"
   },
   "scripts": {
+    "prod": "ts-node dist/watcher",
     "start": "ts-node app/index",
     "watcher": "ts-node app/watcher"
   },
