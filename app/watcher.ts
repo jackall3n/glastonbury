@@ -23,7 +23,11 @@ const watch = async () => {
 
     content.find('.entry-content').removeAttr('data-refresh-id');
 
-    const site_content = content.find('body').html().replace(/serverTime: [0-9]+,/gm, '');
+    const body = content.find('body');
+
+    body.remove('#google_translate_element');
+
+    const site_content = body.html().replace(/serverTime: [0-9]+,/gm, '');
 
     const minified = minifier.minify(site_content, {
         //collapseWhitespace: true,
