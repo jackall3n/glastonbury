@@ -23,9 +23,10 @@ const watch = async () => {
 
     content.find('.entry-content').removeAttr('data-refresh-id');
 
-    const body = content.find('body');
+    let body = content.find('body');
 
-    body.remove('#google_translate_element');
+    body.find('#google_translate_element').remove();
+    body.find('.screen-reader-text').remove();
 
     const site_content = body.html().replace(/serverTime: [0-9]+,/gm, '');
 
