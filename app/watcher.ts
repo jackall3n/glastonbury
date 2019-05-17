@@ -74,7 +74,7 @@ const watch = async () => {
         console.log('sending message');
         const response = await send();
         if (['queued', 'sending', 'sent'].includes(response.status)) {
-            timeout = timeout * 2;
+            timeout += (timeout * 0.5);
         }
 
     }
