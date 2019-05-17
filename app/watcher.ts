@@ -9,6 +9,7 @@ import {send} from './';
 const log = console.log;
 
 let overwrite = process.argv.includes('--overwrite');
+let dryRun = process.argv.includes('--dry-run');
 
 const CURRENT = __dirname + '/current.html';
 
@@ -69,9 +70,13 @@ const watch = async () => {
 
     }
 
-    if (!overwrite && changed && process.env.DISABLE_MESSAGING !== "true") {
+    if (!overwrite && changed && process.env.DISABLE_MESSAGING !== "true" && !dryRun) {
         console.log('sending message');
-        await send();
+        const response = await send();
+        if (['queued', 'sending', 'sent'].includes(response.status)) {
+            timeout = timeout * 2;
+        }
+
     }
 
     if (overwrite) {
@@ -84,7 +89,7 @@ const delay = ms => new Promise(r => {
     setTimeout(r, ms);
 });
 
-const timeout = process.env.BACKOFF_TIMEOUT ? parseInt(process.env.BACKOFF_TIMEOUT) : 5000;
+let timeout = process.env.BACKOFF_TIMEOUT ? parseInt(process.env.BACKOFF_TIMEOUT) : 5000;
 
 const main = async () => {
     await fs.ensureFile(CURRENT);
