@@ -50,9 +50,9 @@ const watch = async () => {
         diffs.forEach(function (part) {
 
             if (part.added) {
-                m += chalk.bgGreen(JSON.stringify(part.value));
+                m += chalk.bgGreen(part.value);
             } else if (part.removed) {
-                m += chalk.bgRed(JSON.stringify(part.value));
+                m += chalk.bgRed(part.value);
             } else {
                 let value = part.value;
 
