@@ -11,6 +11,10 @@ const log = console.log;
 let overwrite = process.argv.includes('--overwrite');
 let dryRun = process.argv.includes('--dry-run');
 
+
+const TIMEOUT_INITIAL = process.env.BACKOFF_TIMEOUT ? parseInt(process.env.BACKOFF_TIMEOUT) : 5000;
+let timeout = TIMEOUT_INITIAL;
+
 const CURRENT = __dirname + '/current.html';
 
 const watch = async () => {
@@ -83,13 +87,15 @@ const watch = async () => {
         await fs.writeFile(CURRENT, minified);
         overwrite = false;
     }
+
+    if (!changed) {
+        timeout = TIMEOUT_INITIAL;
+    }
 };
 
 const delay = ms => new Promise(r => {
     setTimeout(r, ms);
 });
-
-let timeout = process.env.BACKOFF_TIMEOUT ? parseInt(process.env.BACKOFF_TIMEOUT) : 5000;
 
 const main = async () => {
     await fs.ensureFile(CURRENT);
